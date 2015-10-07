@@ -9,13 +9,13 @@ import dagger.Provides;
  */
 @dagger.Module
 public class Module {
-    @Provides
-    Part providePart(){
-        return new Part("c");
+    @Provides @Singleton
+    Part providePart() {
+        return new Part();
     }
 
-    @Provides @Singleton
-    Model provideModel(){
-        return new Model(new Part("a"), new Part("b"), 1);
+    @Provides
+    Part[] provideParts() {
+        return new Part[]{new Part("a"), new Part("b"), new Part("c")};
     }
 }

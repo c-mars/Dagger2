@@ -6,14 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import org.joda.time.DateTime;
 import org.joda.time.MutableDateTime;
 
-import java.util.Random;
-
 import javax.inject.Inject;
 
-import dagger.*;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
+
+    @Inject
+    Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Timber.plant(new Timber.DebugTree());
 
-        Component component = DaggerComponent.builder().module(new Module()).build();
-        Model model = component.provideModel();
+        Component component = DaggerComponent.builder().build();
+        Model model = component.model();
 
 
-        Timber.d(model.toString());
+        Timber.d(model.desc());
 
 //        Random random=new Random();
 //        for(int i=0;i<10;i++){

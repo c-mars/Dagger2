@@ -7,5 +7,5 @@ import javax.inject.Singleton;
  */
 @Singleton @dagger.Component(modules = Module.class)
 public interface Component {
-    Model provideModel();
+    Model model();
 }

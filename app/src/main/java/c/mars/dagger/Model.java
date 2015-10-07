@@ -2,18 +2,29 @@ package c.mars.dagger;
 
 import javax.inject.Inject;
 
+import dagger.Lazy;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Created by mars on 10/7/15.
  */
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data
+@AllArgsConstructor
 public class Model {
-    @Inject
-    Part top, bottom;
 
+    Lazy<Part> top, bottom;
+    @Inject
+    Part[] parts;
     private int size = 10;
+
+    @Inject
+    Model(Lazy<Part> top, Lazy<Part> bottom) {
+        this.top = top;
+        this.bottom = bottom;
+    }
+
+    public String desc() {
+        return top.get().getName() + ", " + bottom.get().getName();
+    }
 }
