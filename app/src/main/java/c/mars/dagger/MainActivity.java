@@ -8,6 +8,10 @@ import org.joda.time.MutableDateTime;
 
 import javax.inject.Inject;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import rx.functions.Action1;
+import rx.functions.Func2;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,11 +31,26 @@ public class MainActivity extends AppCompatActivity {
 
         Timber.d(model.desc());
 
+        merge();
+
 //        Random random=new Random();
 //        for(int i=0;i<10;i++){
 //            Timber.d(String.valueOf(random.nextInt(50)/10.0f));
 //        }
 //        timeDemo();
+    }
+
+    private void merge() {
+        rx.Observable a = rx.Observable.from(new Integer[]{1, 2, 3, 4});
+        rx.Observable b = rx.Observable.from(new String[]{"a", "b", "c", "d"});
+        rx.Observable.zip(a, b, new Func2<Integer, String, ValuesPair>() {
+            @Override
+            public ValuesPair call(Integer v, String d) {
+                return new ValuesPair(v, d);
+            }
+        }).subscribe((Action1) valuesPair -> {
+            Timber.d(valuesPair.toString());
+        });
     }
 
     private void timeDemo(){
@@ -52,5 +71,12 @@ public class MainActivity extends AppCompatActivity {
             slots.end.addHours(1);
             return slots;
         }
+    }
+
+    @Data
+    @AllArgsConstructor
+    class ValuesPair {
+        private Integer value;
+        private String description;
     }
 }
