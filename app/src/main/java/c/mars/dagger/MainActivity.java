@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
         Optional<Integer> n = Optional.fromNullable(null);
         Timber.d(n.or(-1).toString());
+
+        Optional<Some> someVal = Optional.fromNullable(new Some(1)),
+                someWithoutVal = Optional.fromNullable(new Some()),
+                someNull = Optional.fromNullable(null);
+        Timber.d("val:" + someVal.transform(Some::getValue).or(-1).toString()
+                + ", without:" + someWithoutVal.transform(s -> Optional.fromNullable(s.getValue()).or(-1)).get().toString()
+                + ", null:" + someNull.transform(Some::getValue).or(-1).toString());
+
     }
 
     private void merge() {
@@ -74,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
             slots.end.addHours(1);
             return slots;
         }
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    class Some {
+        private Integer value;
     }
 
     @Data
