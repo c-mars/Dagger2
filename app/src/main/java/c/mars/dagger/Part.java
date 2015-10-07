@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * Created by mars on 10/7/15.
+ * Created by Constantine Mars on 10/7/15.
  */
 @Data
 @AllArgsConstructor

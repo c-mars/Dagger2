@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 import dagger.Provides;
 
 /**
- * Created by mars on 10/7/15.
+ * Created by Constantine Mars on 10/7/15.
  */
 @dagger.Module
 public class Module {
