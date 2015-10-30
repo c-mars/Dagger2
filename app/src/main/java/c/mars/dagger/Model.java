@@ -13,18 +13,18 @@ import lombok.Data;
 @AllArgsConstructor
 public class Model {
 
-    Lazy<Part> top, bottom;
+    Part top, bottom;
     @Inject
     Part[] parts;
     private int size = 10;
 
     @Inject
-    Model(Lazy<Part> top, Lazy<Part> bottom) {
+    Model(Part top, Part bottom) {
         this.top = top;
         this.bottom = bottom;
     }
 
     public String desc() {
-        return top.get().getName() + ", " + bottom.get().getName();
+        return top.getName() + ", " + bottom.getName();
     }
 }

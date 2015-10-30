@@ -26,9 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Timber.plant(new Timber.DebugTree());
 
-        Component component = DaggerComponent.builder().build();
-        Model model = component.model();
-
+        DaggerComponent.builder().build().inject(this);
 
         Timber.d(model.desc());
 

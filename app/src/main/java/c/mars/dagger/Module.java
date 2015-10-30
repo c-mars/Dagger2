@@ -1,5 +1,7 @@
 package c.mars.dagger;
 
+import android.content.Context;
+
 import javax.inject.Singleton;
 
 import dagger.Provides;
@@ -18,4 +20,7 @@ public class Module {
     Part[] provideParts() {
         return new Part[]{new Part("a"), new Part("b"), new Part("c")};
     }
+
+    @Provides @Singleton
+    Model provideModel() {return  new Model(new Part(), new Part());}
 }
